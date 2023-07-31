@@ -1,21 +1,20 @@
 package com.example;
 
+import org.junit.Rule;
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.rules.ExpectedException;
 
 public class LionConstructorExceptionTest {
 
+    @Rule
+    public ExpectedException expectedEx = ExpectedException.none();
     @Test
-    public void lionConstructorNotCorrectSexTest() {
+    public void lionConstructorNotCorrectSexTest() throws Exception {
+        expectedEx.expect(Exception.class);
+        expectedEx.expectMessage("Используйте допустимые значения пола животного - самей или самка");
+
         Feline feline = new Feline();
-        String notCorrectSex = "TransLion";
-        String expectedResult = "Используйте допустимые значения пола животного - самей или самка";
-        try{
+        String notCorrectSex = "NotCorrectLion";
         new Lion(feline, notCorrectSex);
-        }
-        catch (Exception thrown) {
-            assertThat(expectedResult, is(thrown.getMessage()));
-        }
     }
 }
